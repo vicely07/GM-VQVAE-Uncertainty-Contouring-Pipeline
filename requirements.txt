@@ -1,0 +1,12 @@
+torch
+torchvision
+numpy
+nibabel
+pandas
+opencv-python
+scipy
+ndimage
+simpleITK
+pydicom
+scikit-image
+tqdm
