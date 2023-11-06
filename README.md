@@ -25,7 +25,9 @@ git clone https://github.com/deepmind/surface-distance.git
 pip install surface-distance/
 
 ## Export:
+```
 python export.py
+```
 
 ## Training & Evaluation
 ## Dataset:
@@ -35,23 +37,32 @@ We used a dataset of deidentified CT scans extracted from MD Anderson Cancer cli
 # Prepare the data:
 ## Extract nnUnet segmentation:
 ## 1. Process data for nnUnet:
+```
 cd utils
 python dcm2nii.py --input_path ..data/input/dicom_ct/ --output_path ..data/input/nifti_formatted_ct/
+```
 
 ## 2. nnUnet segmentation extraction:
+```
 cd nnUnet/nnUNet
 pip install -e .
 nnUNet_predict -i ../data/input/seg/nifti_formatted_ct/ -o ../data/input/seg/3d_masks -t Task201_Prostate -m 3d_fullres
 nnUNet_predict -i ../data/input/seg/nifti_formatted_ct/ -o ../data/input/seg/3d_masks -t Task202_Bladder -m 3d_fullres
 nnUNet_predict -i ../data/input/seg/nifti_formatted_ct/ -o ../data/input/seg/3d_masks -t Task203_Rectum -m 3d_fullres
+```
 
 ## 3. Extract slices from 3d segmentation masks:
+```
 python extract_slices --input_path ../../data/seg/3d_masks/Prostate --output_mask ../../data/seg/2d_slices
+```
 
 ## Organize slices into test
 
 ## Training:
+```
 python train.py
-
+```
 ## Evaluation:
+```
 python eval.py
+```
